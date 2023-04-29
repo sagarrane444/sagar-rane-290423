@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -102,6 +103,17 @@ public class CustomerController {
 			return new ResponseEntity<Customer>(newCustomer,HttpStatus.OK);	
 		}catch(RuntimeException e){
 			return new ResponseEntity<String>("Unable to create Customer. Mobile number already present",HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	//Delete Customer using mobile number
+	@DeleteMapping("/{mobileNumber}")
+	ResponseEntity<?> deleteByMobileNo(@PathVariable String mobileNumber){
+		try {
+			custService.deleteByNumber(mobileNumber);
+			return new ResponseEntity<String>("Customer deleted successfully", HttpStatus.OK);
+		}catch(RuntimeException e) {
+			return new ResponseEntity<String>("Customer with given mobile number doesn't exists", HttpStatus.NOT_FOUND);
 		}
 	}
 }

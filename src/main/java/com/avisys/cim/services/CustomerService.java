@@ -22,4 +22,6 @@ public interface CustomerService {
 
 	Customer addNewCustomer(CustomerCreateInputDTO cust);
 
+	void deleteByNumber(String mobileNumber);
+
 }

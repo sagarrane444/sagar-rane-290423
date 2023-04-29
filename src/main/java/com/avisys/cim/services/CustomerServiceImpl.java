@@ -68,6 +68,13 @@ public class CustomerServiceImpl implements CustomerService {
 		cust.setMobileNumbers(numbers);
 		return cust;
 	}
+
+	@Override
+	public void deleteByNumber(String mobileNumber) {
+		MobileNumber number= mobilRepo.findByNumber(mobileNumber).orElseThrow();
+		custRepo.delete(number.getCust());
+		
+	}
 	
 	
 }
