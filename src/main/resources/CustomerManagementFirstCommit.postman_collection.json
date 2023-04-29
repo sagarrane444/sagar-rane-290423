@@ -1,0 +1,121 @@
+{
+	"info": {
+		"_postman_id": "b623bfd0-86e9-4aa9-a4b5-6ef08a6b8515",
+		"name": "CustomerManagementFirstCommit",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25562779"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/customer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/customer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/customer/firstname/jo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/customer/firstname/jo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"firstname",
+						"jo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/customer/lastname/mi",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/customer/lastname/mi",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"lastname",
+						"mi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/customer/customerinfo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"John\",\n    \"lastName\": \"Smith\",\n    \"mobileNumber\": \"9111111113\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/customer/customerinfo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"customerinfo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/customer/mobile/9111111111",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/customer/mobile/9111111111",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"mobile",
+						"9111111111"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
