@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.avisys.cim.Customer;
+import com.avisys.cim.CustomerInputDTO;
 import com.avisys.cim.services.CustomerService;
 
 import net.bytebuddy.implementation.bytecode.Throw;
@@ -36,17 +37,6 @@ public class CustomerController {
 		return new ResponseEntity<>(HttpStatus.OK).ok(custService.getAllCustomers());
 	}
 
-	//Retrieve customer by only mobile number
-	@GetMapping("/mobile/{moNo}")
-	ResponseEntity<?> getByMobile(@PathVariable String moNo ) {
-
-		try {
-			Customer cust= custService.getSingleByMobile(moNo);
-			return new ResponseEntity<Customer>(cust, HttpStatus.OK);
-		}catch(NoSuchElementException e) {
-			return new ResponseEntity<String>("No Such Customer Found, Please enter valid Mobile Number.",HttpStatus.NOT_FOUND);
-		}
-	}
 
 	//Retrieve customer by only first name
 	@GetMapping("/firstname/{firstName}")
@@ -75,7 +65,7 @@ public class CustomerController {
 
 	//Retrieve customer by first name, last name and mobile number
 	@PostMapping("/customerinfo")
-	ResponseEntity<?> getByCustomerInfo(@RequestBody Customer cust){
+	ResponseEntity<?> getByCustomerInfo(@RequestBody CustomerInputDTO cust){
 		try {
 			if(cust!=null && cust.getFirstName()!=null && cust.getLastName()!=null && cust.getMobileNumber()!=null) {
 				Customer customer = custService.getCustomerByCustomerInfo(cust);
@@ -91,19 +81,15 @@ public class CustomerController {
 		}
 	}
 	
-	//Create new Customer
-	@PostMapping("/create")
-	ResponseEntity<?> createNewCustomer(@RequestBody Customer customer){
+	//Retrieve customer by only mobile number
+	@GetMapping("/mobile/{moNo}")
+	ResponseEntity<?> getByMobile(@PathVariable String moNo ) {
 		
-		//tracer
-		System.out.println("In Controller "+customer.getFirstName()+", "+customer.getMobileNumber());
-		
-		Customer newCustomer = custService.addNewCustomer(customer);
-		if(newCustomer!=null)
-			return new ResponseEntity<Customer>(newCustomer,HttpStatus.OK);	
-		else{
-			return new ResponseEntity<String>("Unable to create Customer. Mobile number already present",HttpStatus.INTERNAL_SERVER_ERROR);
+		try {
+			Customer cust= custService.getSingleByMobile(moNo);
+			return new ResponseEntity<Customer>(cust, HttpStatus.OK);
+		}catch(NoSuchElementException e) {
+			return new ResponseEntity<String>("No Such Customer Found, Please enter valid Mobile Number.",HttpStatus.NOT_FOUND);
 		}
 	}
-
 }

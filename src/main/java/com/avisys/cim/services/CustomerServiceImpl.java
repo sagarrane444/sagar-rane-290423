@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.avisys.cim.Customer;
+import com.avisys.cim.CustomerInputDTO;
+import com.avisys.cim.MobileNumber;
 import com.avisys.cim.repos.CustomerRepo;
+import com.avisys.cim.repos.MobileNumbersRepo;
 
 import jakarta.transaction.Transactional;
 
@@ -17,6 +20,9 @@ import jakarta.transaction.Transactional;
 public class CustomerServiceImpl implements CustomerService {
 	@Autowired
 	private CustomerRepo custRepo;
+	
+	@Autowired
+	private MobileNumbersRepo mobilRepo;
 
 	@Override
 	public List<Customer> getAllCustomers() {
@@ -25,7 +31,8 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer getSingleByMobile(String moNo) {
-		return custRepo.findByMobileNumber(moNo).orElseThrow();
+		MobileNumber number= mobilRepo.findByNumber(moNo).orElseThrow();
+		return custRepo.findById(number.getCust().getId()).orElseThrow();
 	}
 
 	@Override
@@ -42,20 +49,15 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Customer getCustomerByCustomerInfo(Customer cust) {
-		return custRepo.getSpecific(cust.getFirstName(), cust.getLastName(), cust.getMobileNumber()).stream().findFirst().orElseThrow();
+	public Customer getCustomerByCustomerInfo(CustomerInputDTO cust) {
+		Customer customer= custRepo.getSpecific(cust.getFirstName(), cust.getLastName()).stream().findFirst().orElseThrow();
+		customer.getMobileNumbers().stream().filter(m->m.getNumber().equals(cust.getMobileNumber())).findAny().orElseThrow();
+		return customer;
 	}
 
 	@Override
 	public Customer addNewCustomer(Customer customer) {
-		System.out.println("In Customer Service");
-		try {
-			Customer oldCustomer = custRepo.findByMobileNumber(customer.getMobileNumber()).orElseThrow();
-			return null;
-		}catch(NoSuchElementException e) {
-			System.out.println("In catch block");
-			return custRepo.save(customer);
-		}
+		return custRepo.save(customer);
 	}
 	
 	

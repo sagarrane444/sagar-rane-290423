@@ -1,4 +1,7 @@
-INSERT INTO customer (id, first_name, last_name, mobile_number) VALUES (1, 'Alan', 'Smith', 9111111111);
-INSERT INTO customer (id, first_name, last_name, mobile_number) VALUES (2, 'Joe', 'Turing', 9111111112);
-INSERT INTO customer (id, first_name, last_name, mobile_number) VALUES (3, 'John', 'Smith', 9111111113);
-INSERT INTO customer (id, first_name, last_name, mobile_number) VALUES (4, 'Kathy', 'Sierra', 9111111114);
+INSERT INTO customer (id, first_name, last_name) values(default,'Sagar', 'Rane');
+INSERT INTO MOBILE_NUMBERS (MOBILE_NUMBER, CUST_ID) VALUES ('9222222222',1);
+INSERT INTO MOBILE_NUMBERS (MOBILE_NUMBER, CUST_ID) VALUES ('9333333333',1);
+INSERT INTO customer (id, first_name, last_name) values(default,'Snehal', 'Navale');
+INSERT INTO MOBILE_NUMBERS (MOBILE_NUMBER, CUST_ID) VALUES ('9444444444',2);
+INSERT INTO MOBILE_NUMBERS (MOBILE_NUMBER, CUST_ID) VALUES ('9555555555',2);
+INSERT INTO MOBILE_NUMBERS (MOBILE_NUMBER, CUST_ID) VALUES ('9666666666',2);

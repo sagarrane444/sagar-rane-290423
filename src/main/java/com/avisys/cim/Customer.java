@@ -1,10 +1,15 @@
 package com.avisys.cim;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,8 +26,8 @@ public class Customer {
 	@Column(name = "LAST_NAME", nullable = false)
 	private String lastName;
 
-	@Column(name = "MOBILE_NUMBER", unique = true, nullable = false)
-	private String mobileNumber;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "cust" , orphanRemoval = true)
+	private List<MobileNumber> mobileNumbers = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -47,20 +52,29 @@ public class Customer {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
-	public String getMobileNumber() {
-		return mobileNumber;
+	
+	public void addMobileNumber(MobileNumber number) {
+		this.mobileNumbers.add(number);
+		number.setCust(this);
+	}
+	
+	public void removeMobileNumber(MobileNumber number) {
+		this.mobileNumbers.remove(number);
+		number.setCust(null);
 	}
 
-	public void setMobileNumber(String mobileNumber) {
-		this.mobileNumber = mobileNumber;
+	public List<MobileNumber> getMobileNumbers() {
+		return mobileNumbers;
 	}
 
-	public Customer(String firstName, String lastName, String mobileNumber) {
+	public void setMobileNumbers(List<MobileNumber> mobileNumbers) {
+		this.mobileNumbers = mobileNumbers;
+	}
+
+	public Customer(String firstName, String lastName) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.mobileNumber = mobileNumber;
 	}
 
 	public Customer() {
