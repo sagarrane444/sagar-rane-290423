@@ -1,6 +1,7 @@
 package com.avisys.cim.services;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,18 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Customer getCustomerByCustomerInfo(Customer cust) {
 		return custRepo.getSpecific(cust.getFirstName(), cust.getLastName(), cust.getMobileNumber()).stream().findFirst().orElseThrow();
+	}
+
+	@Override
+	public Customer addNewCustomer(Customer customer) {
+		System.out.println("In Customer Service");
+		try {
+			Customer oldCustomer = custRepo.findByMobileNumber(customer.getMobileNumber()).orElseThrow();
+			return null;
+		}catch(NoSuchElementException e) {
+			System.out.println("In catch block");
+			return custRepo.save(customer);
+		}
 	}
 	
 	

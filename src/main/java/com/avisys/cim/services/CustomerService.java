@@ -2,6 +2,8 @@ package com.avisys.cim.services;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+
 import com.avisys.cim.Customer;
 
 public interface CustomerService {
@@ -15,5 +17,7 @@ public interface CustomerService {
 	List<Customer> getCustomerByLastName(String lastName);
 
 	Customer getCustomerByCustomerInfo(Customer cust);
+
+	Customer addNewCustomer(Customer customer);
 
 }

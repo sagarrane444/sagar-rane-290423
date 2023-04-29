@@ -1,0 +1,39 @@
+{
+	"info": {
+		"_postman_id": "ee62c3e9-cb06-4d81-8ce7-ef7a81162b75",
+		"name": "CustomerManagementSecondCommit",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25562779"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/customer/create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"Sagar\",\n    \"lastName\": \"Rane\",\n    \"mobileNumber\": \"7972841832\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/customer/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"create"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
