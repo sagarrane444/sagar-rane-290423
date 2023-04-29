@@ -3,6 +3,7 @@ package com.avisys.cim;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -26,7 +27,7 @@ public class Customer {
 	@Column(name = "LAST_NAME", nullable = false)
 	private String lastName;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "cust" , orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "cust" , orphanRemoval = true, cascade =CascadeType.ALL)
 	private List<MobileNumber> mobileNumbers = new ArrayList<>();
 
 	public Long getId() {

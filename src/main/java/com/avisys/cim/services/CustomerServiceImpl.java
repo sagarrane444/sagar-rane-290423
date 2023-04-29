@@ -1,5 +1,6 @@
 package com.avisys.cim.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.avisys.cim.Customer;
+import com.avisys.cim.CustomerCreateInputDTO;
 import com.avisys.cim.CustomerInputDTO;
 import com.avisys.cim.MobileNumber;
 import com.avisys.cim.repos.CustomerRepo;
@@ -56,8 +58,15 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Customer addNewCustomer(Customer customer) {
-		return custRepo.save(customer);
+	public Customer addNewCustomer(CustomerCreateInputDTO customer) {
+		Customer cust= new Customer(customer.getFirstName(), customer.getLastName());
+		cust= custRepo.save(cust);
+		List<MobileNumber> numbers=new ArrayList<>();
+		for(int i=0; i<customer.getNumbers().size(); i++) {
+			numbers.add(new MobileNumber(customer.getNumbers().get(i), cust));
+		}
+		cust.setMobileNumbers(numbers);
+		return cust;
 	}
 	
 	

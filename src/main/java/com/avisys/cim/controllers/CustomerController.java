@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.avisys.cim.Customer;
+import com.avisys.cim.CustomerCreateInputDTO;
 import com.avisys.cim.CustomerInputDTO;
 import com.avisys.cim.services.CustomerService;
 
@@ -90,6 +91,17 @@ public class CustomerController {
 			return new ResponseEntity<Customer>(cust, HttpStatus.OK);
 		}catch(NoSuchElementException e) {
 			return new ResponseEntity<String>("No Such Customer Found, Please enter valid Mobile Number.",HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	//Create new Customer
+	@PostMapping("/create")
+	ResponseEntity<?> createNewCustomer(@RequestBody CustomerCreateInputDTO cust){
+		try {
+		Customer newCustomer = custService.addNewCustomer(cust);
+			return new ResponseEntity<Customer>(newCustomer,HttpStatus.OK);	
+		}catch(RuntimeException e){
+			return new ResponseEntity<String>("Unable to create Customer. Mobile number already present",HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 }

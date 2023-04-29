@@ -5,7 +5,7 @@ CREATE TABLE customer (
 );
 
 CREATE TABLE mobile_numbers (
-	MOBILE_NUMBER varchar(15) not null,
+	MOBILE_NUMBER varchar(15) not null unique,
 	cust_id BIGINT not null
 );
 

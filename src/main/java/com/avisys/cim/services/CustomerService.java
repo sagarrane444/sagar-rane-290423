@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 import com.avisys.cim.Customer;
+import com.avisys.cim.CustomerCreateInputDTO;
 import com.avisys.cim.CustomerInputDTO;
 
 public interface CustomerService {
@@ -19,6 +20,6 @@ public interface CustomerService {
 
 	Customer getCustomerByCustomerInfo(CustomerInputDTO cust);
 
-	Customer addNewCustomer(Customer customer);
+	Customer addNewCustomer(CustomerCreateInputDTO cust);
 
 }

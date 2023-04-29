@@ -2,6 +2,7 @@ package com.avisys.cim;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -17,7 +18,7 @@ public class MobileNumber {
 	@Column(name = "MOBILE_NUMBER", unique = true, nullable = false)
 	private String number;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JsonIgnore
 	@JoinColumn(name = "cust_id")
 	private Customer cust;
