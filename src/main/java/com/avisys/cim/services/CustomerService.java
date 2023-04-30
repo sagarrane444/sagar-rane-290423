@@ -2,8 +2,6 @@ package com.avisys.cim.services;
 
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
-
 import com.avisys.cim.Customer;
 import com.avisys.cim.CustomerCreateInputDTO;
 import com.avisys.cim.CustomerInputDTO;
@@ -23,5 +21,9 @@ public interface CustomerService {
 	Customer addNewCustomer(CustomerCreateInputDTO cust);
 
 	void deleteByNumber(String mobileNumber);
+
+	void addMobileNumbers(Long id, List<String> numbers);
+
+	void removeMobileNumbers(Long id, List<String> numbers);
 
 }

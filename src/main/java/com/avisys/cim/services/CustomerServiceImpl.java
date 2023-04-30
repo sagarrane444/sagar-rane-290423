@@ -2,7 +2,6 @@ package com.avisys.cim.services;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +72,23 @@ public class CustomerServiceImpl implements CustomerService {
 	public void deleteByNumber(String mobileNumber) {
 		MobileNumber number= mobilRepo.findByNumber(mobileNumber).orElseThrow();
 		custRepo.delete(number.getCust());
+		
+	}
+
+	@Override
+	public void addMobileNumbers(Long id, List<String> numbers) {
+		Customer cust = custRepo.findById(id).orElseThrow();
+		numbers.stream().forEach(n->{
+			cust.addMobileNumber(new MobileNumber(n, cust));
+		});
+	}
+
+	@Override
+	public void removeMobileNumbers(Long id, List<String> numbers) {
+		Customer cust = custRepo.findById(id).orElseThrow();
+		numbers.stream().forEach(n->{
+			cust.removeMobileNumber(mobilRepo.findByNumber(n).orElseThrow());
+		});
 		
 	}
 	
